@@ -7,7 +7,7 @@ const createApolloClient = () => {
     uri: process.env.SUPABASE_SERVER,
     cache: new InMemoryCache(),
     headers: {
-      apiKey: API_KEY,
+      Authorization: `Bearer ${API_KEY}`,
     },
   });
 };
