@@ -3,36 +3,51 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DIRECT_URL")
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  username      String    @unique
-  password      String
+  id            String       @id @default(cuid())
+  name      String    @unique
   email         String    @unique
-  role          Role
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  role          Role  @default(USER)
   createdAt     DateTime  @default(now())
   lastModified  DateTime  @updatedAt
   Borrow        Borrow[]
-  Session       Session[]
+  session       Session[] @relation(name: "SessionToUser")
+  accounts       Account[] @relation(name: "AccountToUser")
 }
 
 model Session {
-  id            Int       @id @default(autoincrement())
   sessionToken  String    @unique
-  userId        Int
+  userId        String      @map("user_id")
   expires       DateTime
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade, name: "SessionToUser")
+}
 
-  createdAt     DateTime  @default(now())
-  lastModified  DateTime  @updatedAt
+model Account {
+  userId             String  @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade, name: "AccountToUser")
+
+  @@unique([provider, providerAccountId])
 }
 
 model Borrow {
-  id            Int       @id @default(autoincrement())
-  userId        Int
+  id            String      @id @default(cuid())
+  userId        String
   bookId        Int
   isActive      Boolean
   returned      Boolean
