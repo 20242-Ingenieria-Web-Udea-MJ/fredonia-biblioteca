@@ -8,52 +8,64 @@ datasource db {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
   password      String
-  email         String   @unique
+  email         String    @unique
   role          Role
-  createdAt     DateTime @default(now())
-  lastModified  DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  lastModified  DateTime  @updatedAt
   Borrow        Borrow[]
+  Session       Session[]
+}
+
+model Session {
+  id            Int       @id @default(autoincrement())
+  sessionToken  String    @unique
+  userId        Int
+  expires       DateTime
+  user          User      @relation(fields: [userId], references: [id])
+
+  createdAt     DateTime  @default(now())
+  lastModified  DateTime  @updatedAt
 }
 
 model Borrow {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   userId        Int
   bookId        Int
   isActive      Boolean
   returned      Boolean
   startDate     DateTime
   endDate       DateTime
-  lastModified  DateTime @updatedAt
-  createdAt     DateTime @default(now())
-  user          User     @relation(fields: [userId], references: [id])
-  book          Book     @relation(fields: [bookId], references: [id])
+  lastModified  DateTime  @updatedAt
+  createdAt     DateTime  @default(now())
+  user          User      @relation(fields: [userId], references: [id])
+  book          Book      @relation(fields: [bookId], references: [id])
 }
 
 model Book {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   referenceId   Int
   createdBy     Int
   isBorrowed    Boolean
-  createdAt     DateTime @default(now())
-  lastModified  DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  lastModified  DateTime  @updatedAt
   reference     Reference @relation(fields: [referenceId], references: [id])
   Borrow        Borrow[]
 }
 
 model Reference {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   createdBy     Int
   title         String
   publisher     String
   publicationYear Int
-  ISBN          String   @unique
+  ISBN          String    @unique
   genre         String
   availableUnits Int
-  createdAt     DateTime @default(now())
-  lastModified  DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  lastModified  DateTime  @updatedAt
   Book          Book[]
 }
 
