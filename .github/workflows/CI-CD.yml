@@ -1,5 +1,8 @@
 name: Continuos Integration and Deployment
-on: [push]
+on:
+  push:
+    branches:
+      - main
 env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}w
