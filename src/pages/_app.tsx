@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
 
 export default function App({
   Component,
@@ -11,7 +12,10 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={createApolloClient()}>
-        <Component {...pageProps} />
+        <Head>
+          <title>Biblioteca Fredonia</title>
+          <Component {...pageProps} />
+        </Head>
       </ApolloProvider>
     </SessionProvider>
   );
