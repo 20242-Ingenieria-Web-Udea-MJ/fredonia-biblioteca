@@ -14,8 +14,8 @@ export default function App({
       <ApolloProvider client={createApolloClient()}>
         <Head>
           <title>Biblioteca Fredonia</title>
-          <Component {...pageProps} />
         </Head>
+        <Component {...pageProps} />
       </ApolloProvider>
     </SessionProvider>
   );
