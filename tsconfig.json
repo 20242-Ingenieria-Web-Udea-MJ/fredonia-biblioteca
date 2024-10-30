@@ -24,9 +24,6 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@apollo/*": [
-        "./src/apollo/*"
-      ],
       "@hooks/*": [
         "./src/hooks/*"
       ],
