@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import localFont from "next/font/local";
 
 const geistSans = localFont({
@@ -11,17 +10,6 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
-export async function getServerSideProps() {
-  const prisma = new PrismaClient();
-  const users = await prisma.user.findMany();
-
-  return {
-    props: {
-      user: JSON.parse(JSON.stringify(users)),
-    },
-  };
-}
 
 export default function Home() {
   return (
