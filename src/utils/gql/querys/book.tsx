@@ -15,8 +15,8 @@ export const GET_ALL_BOOKS = gql`
 `;
 
 export const GET_USER = gql`
-  query User($userId: String!) {
-    user(id: $userId) {
+  query Book($bookId: String!) {
+    book(id: $bookId) {
       id
       name
       email

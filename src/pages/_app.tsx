@@ -1,9 +1,9 @@
-import createApolloClient from "@/apollo/Client";
 import "@/styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import createApolloClient from "@/apollo/Client";
 
 export default function App({
   Component,
