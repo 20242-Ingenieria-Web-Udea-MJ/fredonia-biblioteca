@@ -2,12 +2,12 @@ import localFont from "next/font/local";
 import BooksReferences from "@/components/organisms/borrow";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../lib/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../lib/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -19,7 +19,6 @@ export default function Home() {
     >
       <h1 className="text-5xl text-primary">Biblioteca fredonia</h1>
       <BooksReferences />
-      <div></div>
     </div>
   );
 }
