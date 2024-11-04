@@ -4,6 +4,7 @@ import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import Layout from "@/components/organisms/Layout";
 
 export default function App({
   Component,
@@ -15,7 +16,9 @@ export default function App({
         <Head>
           <title>Biblioteca Fredonia</title>
         </Head>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ApolloProvider>
     </SessionProvider>
   );
