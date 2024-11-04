@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
@@ -15,9 +14,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { useQuery } from '@apollo/client';
 import React from 'react';
-import { GET_ALL_REFERENCES } from '@/utils/gql/querys/reference';
+
+import { useState, useEffect } from "react";
+
 
 type Reference = {
   id: string;
@@ -38,20 +38,30 @@ export default function Component() {
   //   },
   // });
 
-  const [references, setReferences] = React.useState<Reference[]>([]);
+  // const [references, setReferences] = React.useState<Reference[]>([]);
   
-  const { loading, error } = useQuery(GET_ALL_REFERENCES, {
-    fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => {
-      setReferences(data.references);
-    },
-  });
+  // const { loading, error } = useQuery(GET_ALL_REFERENCES, {
+  //   fetchPolicy: 'cache-and-network',
+  //   onCompleted: (data) => {
+  //     setReferences(data.references);
+  //   },
+  // });
 
-  console.log(useQuery(GET_ALL_REFERENCES));
+  // console.log(useQuery(GET_ALL_REFERENCES));
 
-  if (loading) return <div className="p-4">Loading...</div>;
-  if (error) return <div className="p-4 text-red-500">Error: {error.message}</div>;
+  // if (loading) return <div className="p-4">Loading...</div>;
+  // if (error) return <div className="p-4 text-red-500">Error: {error.message}</div>;
+  const [references, setReferences] = useState([]);
 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await fetch("/api/reference");
+      const data = await response.json();
+      setReferences(data);
+    };
+
+    fetchTasks();
+  }, []);
 
   return (
       <Card>
