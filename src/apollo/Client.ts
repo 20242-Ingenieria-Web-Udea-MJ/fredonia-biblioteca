@@ -7,6 +7,7 @@ const createApolloClient = () => {
     cache: new InMemoryCache(),
     headers: {
       Authorization: `Bearer ${API_KEY}`,
+      apiKey: API_KEY,
     },
   });
   return apollo

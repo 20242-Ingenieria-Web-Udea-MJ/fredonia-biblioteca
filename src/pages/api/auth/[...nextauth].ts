@@ -27,11 +27,11 @@ const options: NextAuthOptions = {
   },
   providers: [
     Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID || "",
-      clientSecret: process.env.AUTH0_CLIENT_SECRET || "",
-      issuer: `https://${process.env.AUTH0_DOMAIN}`,
+      clientId: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID || "",
+      clientSecret: process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET || "",
+      issuer: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}`,
       authorization: {
-        url: `https://${process.env.AUTH0_DOMAIN}/authorize`,
+        url: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}/authorize`,
         params: { response_type: "code", prompt: "login" },
       },
     }),
