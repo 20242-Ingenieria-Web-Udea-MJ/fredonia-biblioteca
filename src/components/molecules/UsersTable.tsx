@@ -15,16 +15,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { GET_USERS } from "@/graphql/queries/Users";
-import { useQuery } from "@apollo/client";
 import { MoreHorizontal } from "lucide-react";
 import React from "react";
 
 export const UsersTable = () => {
-  const { data, error } = useQuery(GET_USERS);
-
-  console.log(data, error);
-
   return (
     <Table>
       <TableCaption>Lista de usuarios registrados</TableCaption>

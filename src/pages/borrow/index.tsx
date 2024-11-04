@@ -1,8 +1,8 @@
-import CustomersTable from '@/components/organism/borrow';
+import CustomersTable from "@/components/organisms/borrow";
 
 export default function Orders() {
   return (
-    <div className='grid w-full'>
+    <div className="grid w-full">
       <CustomersTable />
     </div>
   );

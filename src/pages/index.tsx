@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
-import BooksReferences from '@/components/organism/borrow';
-
+import BooksReferences from "@/components/organisms/borrow";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
