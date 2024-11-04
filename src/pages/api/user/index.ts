@@ -11,24 +11,24 @@ export default async function handler(
   if (req.method === "GET") {
     const users = await prisma.user.findMany();
     res.json(users);
-  } else if (req.method === "POST") {
-    // CREATE NEW USER
-    const { name, email, role, password } = req.body;
+    // } else if (req.method === "POST") {
+    //   // CREATE NEW USER
+    //   const { name, email, role, password } = req.body;
 
-    try {
-      const newUser = await prisma.user.create({
-        data: {
-          name,
-          email,
-          role,
-          password,
-        },
-      });
-      res.status(201).json(newUser);
-    } catch (error) {
-      console.error("Error creating user:", error);
-      res.status(500).json({ error: "Error creating user" });
-    }
+    //   try {
+    //     const newUser = await prisma.user.create({
+    //       data: {
+    //         name,
+    //         email,
+    //         role,
+    //         password,
+    //       },
+    //     });
+    //     res.status(201).json(newUser);
+    //   } catch (error) {
+    //     console.error("Error creating user:", error);
+    //     res.status(500).json({ error: "Error creating user" });
+    //   }
   } else if (req.method === "DELETE") {
     const { id } = req.body;
     if (!id) {
