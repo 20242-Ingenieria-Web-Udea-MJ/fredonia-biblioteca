@@ -24,6 +24,18 @@ const options: NextAuthOptions = {
       }
       return session;
     },
+    async signIn({ user }) {
+      // Verificar si el usuario existe en Supabase/Prisma
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email! },
+      });
+
+      if (!existingUser) {
+        return false;
+      }
+
+      return true;
+    },
   },
   providers: [
     Auth0Provider({
