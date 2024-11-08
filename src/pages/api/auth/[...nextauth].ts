@@ -44,7 +44,12 @@ const options: NextAuthOptions = {
       issuer: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}`,
       authorization: {
         url: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}/authorize`,
-        params: { response_type: "code", prompt: "login" },
+        params: {
+          response_type: "code",
+          prompt: "login",
+          scope: "openid profile email",
+          audience: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}/api/v2/`,
+        },
       },
     }),
   ],
