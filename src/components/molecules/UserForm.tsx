@@ -46,14 +46,17 @@ export const UserForm = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("User created:", result);
+        router.push("/accounts");
       } else {
-        console.error("Error creating user:", response.statusText);
+        const errorData = await response.json();
+        console.error(
+          "Error creating user:",
+          errorData?.error || response.statusText
+        );
       }
     } catch (error) {
       console.error("Request failed:", error);
     }
-
-    router.push("/accounts");
   }
 
   return (

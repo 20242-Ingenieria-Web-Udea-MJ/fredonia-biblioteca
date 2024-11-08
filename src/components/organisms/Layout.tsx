@@ -9,12 +9,10 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { data: session, status } = useSession();
-
+  if (status === "loading") return <div>Cargando...</div>;
   if (!session) {
     signIn("auth0");
   }
-
-  if (status === "loading") return <div>Cargando...</div>;
 
   return (
     <SidebarProvider className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
