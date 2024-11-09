@@ -9,7 +9,7 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Book className="h-6 w-6 text-primary" />
-            <span className="">Biblioteca</span>
+            <span className="">Biblioteca Fredonia</span>
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
             <Bell className="h-6 w-6" />
@@ -81,29 +81,35 @@ const Sidebar = () => {
           </nav>
         </div>
         <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0">
-            <CardHeader className="p-2 pt-0 md:p-4 flex gap-2 justify-center items-center">
-              <Avatar>
-                <AvatarImage
-                  src={
-                    session?.user?.image ??
-                    "https://cdn-icons-png.flaticon.com/512/2997/2997608.png"
-                  }
-                  alt="Imágen de perfil"
-                />
-              </Avatar>
-              <div className="flex flex-col items-center justify-center">
-                <CardTitle>{session?.user?.name}</CardTitle>
-                <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                  {session?.user?.role}
-                </CardContent>
-              </div>
-              <Button onClick={endSession} className="rounded-full p-2">
-                Cerrar Sesión
-                <LogOut />
-              </Button>
-            </CardHeader>
-          </Card>
+          {session ? (
+            <Card>
+              <CardHeader className="p-2 pt-0 md:p-4 flex gap-2 justify-center items-center">
+                <Avatar>
+                  <AvatarImage
+                    src={
+                      session.user?.image ??
+                      "https://cdn-icons-png.flaticon.com/512/2997/2997608.png"
+                    }
+                    alt="Imágen de perfil"
+                  />
+                </Avatar>
+                <div className="flex flex-col items-center justify-center">
+                  <CardTitle>{session.user?.name}</CardTitle>
+                  <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+                    {session.user?.role}
+                  </CardContent>
+                </div>
+                <Button onClick={endSession} className="rounded-full p-2">
+                  Cerrar Sesión
+                  <LogOut />
+                </Button>
+              </CardHeader>
+            </Card>
+          ) : (
+            <Button onClick={() => signIn("auth0")} className="w-full">
+              Iniciar Sesión
+            </Button>
+          )}
         </div>
       </div>
     </div>
