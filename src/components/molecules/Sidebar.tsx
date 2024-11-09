@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import {
   Bell,
+  Book,
   Home,
   LogOut,
   Package,
-  Package2,
   ShoppingCart,
   Users,
 } from "lucide-react";
@@ -28,15 +28,16 @@ interface ExtendedSession extends Session {
 const Sidebar = () => {
   const { data: session } = useSession() as { data: ExtendedSession | null };
 
-  const endSession = () => {
+  function endSession() {
     signOut();
-  };
+  }
+
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" />
+            <Book className="h-6 w-6 text-primary" />
             <span className="">Biblioteca</span>
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -97,7 +98,8 @@ const Sidebar = () => {
                   {session?.user?.role}
                 </CardContent>
               </div>
-              <Button onClick={endSession} className="rounded-full">
+              <Button onClick={endSession} className="rounded-full p-2">
+                Cerrar Sesión
                 <LogOut />
               </Button>
             </CardHeader>
