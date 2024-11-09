@@ -12,6 +12,8 @@ import { Badge } from "../ui/badge";
 import { ActionsMenu } from "./UsersActionMenu";
 import { EditUserModal } from "./EditUserModal";
 import { UserFormValues } from "@/schemas/UserSchema";
+import { format } from "date-fns";
+import { toast } from "@/hooks/use-toast";
 
 type User = {
   id: string;
@@ -45,8 +47,17 @@ export const UsersTable = () => {
     });
     if (response.ok) {
       setUsers(users.filter((user) => user.id !== userId));
+      toast({
+        title: "Ha ocurrido un error ❌",
+        description: `${
+          users.find((user) => user.id === userId)?.name
+        } ha sido eliminado correctamente`,
+      });
     } else {
-      alert("Error al eliminar el usuario");
+      toast({
+        title: "Ha ocurrido un error ❌",
+        description: "Ha ocurrido un error al eliminar el usuario",
+      });
     }
   };
 
@@ -64,15 +75,22 @@ export const UsersTable = () => {
       setUsers(
         users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
       );
+      toast({
+        title: "Usuario actualizado ✅",
+        description: `${updatedUser.name} ha sido actualizado correctamente`,
+      });
       setSelectedUser(null); //cerrar modal
     } else {
-      alert("Error al actualizar el usuario");
+      toast({
+        title: "Ha ocurrido un error ❌",
+        description: "Ha ocurrido un error al actualizar el usuario",
+      });
     }
   };
 
   const columns = [
     { key: "id", label: "Identificador único" },
-    { key: "name", label: "Nombre" },
+    { key: "createdAt", label: "Fecha de creación" },
     { key: "email", label: "Correo" },
     { key: "role", label: "Rol" },
   ];
@@ -95,7 +113,9 @@ export const UsersTable = () => {
           {users.map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.id}</TableCell>
-              <TableCell>{user.name}</TableCell>
+              <TableCell>
+                {format(new Date(user.createdAt), "dd/MM/yyyy HH:mm")}
+              </TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
                 <Badge>{user.role}</Badge>

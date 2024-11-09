@@ -1,4 +1,9 @@
-import { createAuth0User, getAuth0Token } from "@/utils/api";
+import {
+  createAuth0User,
+  deleteAuth0User,
+  getAuth0Token,
+  updateAuth0User,
+} from "@/utils/api";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -59,11 +64,40 @@ export default async function handler(
     }
   } else if (req.method === "DELETE") {
     const { id } = req.body;
+
     if (!id) {
       return res.status(400).json({ error: "User ID is required" });
     }
+
     try {
+      const { access_token: accessToken, token_type: tokenType } =
+        await getAuth0Token();
+
+      // Obtener el auth0UserId desde la relación con Account en Prisma
+      const userWithAuth0 = await prisma.user.findUnique({
+        where: { id },
+        include: {
+          accounts: {
+            where: { provider: "auth0" },
+            select: { providerAccountId: true },
+          },
+        },
+      });
+
+      if (!userWithAuth0 || !userWithAuth0.accounts.length) {
+        return res
+          .status(404)
+          .json({ error: "User or Auth0 account not found" });
+      }
+
+      const auth0UserId = userWithAuth0.accounts[0].providerAccountId;
+
+      // Eliminar el usuario en Auth0
+      await deleteAuth0User(auth0UserId, accessToken, tokenType);
+
+      // Eliminar el usuario en Supabase
       await prisma.user.delete({ where: { id } });
+
       res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -71,14 +105,48 @@ export default async function handler(
     }
   } else if (req.method === "PUT") {
     const { id, name, email, role } = req.body;
+
     if (!id || !name || !email || !role) {
       return res.status(400).json({ error: "Missing required fields" });
     }
+
     try {
+      const { access_token: accessToken, token_type: tokenType } =
+        await getAuth0Token();
+
+      // Obtener el auth0UserId desde la relación con Account en Prisma
+      const userWithAuth0 = await prisma.user.findUnique({
+        where: { id },
+        include: {
+          accounts: {
+            where: { provider: "auth0" },
+            select: { providerAccountId: true },
+          },
+        },
+      });
+
+      if (!userWithAuth0 || !userWithAuth0.accounts.length) {
+        return res
+          .status(404)
+          .json({ error: "User or Auth0 account not found" });
+      }
+
+      const auth0UserId = userWithAuth0.accounts[0].providerAccountId;
+
+      // Editar el usuario en Auth0
+      await updateAuth0User(
+        auth0UserId,
+        { name, email },
+        accessToken,
+        tokenType
+      );
+
+      // Editar el usuario en Supabase (o en tu base de datos principal)
       const updatedUser = await prisma.user.update({
         where: { id },
         data: { name, email, role },
       });
+
       res.status(200).json(updatedUser);
     } catch (error) {
       console.error("Error updating user:", error);
