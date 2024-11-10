@@ -64,53 +64,34 @@ export default function Component() {
   }, []);
 
   return (
-      <Card>
+      <Card className="w-full h-full overflow-scroll">
         <CardHeader className='px-7'>
-          <CardTitle>Books</CardTitle>
-          <CardDescription>Available books on the library</CardDescription>
+          <CardTitle>Libros</CardTitle>
+          <CardDescription>Libros disponibles en la biblioteca</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead className='hidden sm:table-cell'>Publisher</TableHead>
-                <TableHead className='hidden sm:table-cell'>Publication year</TableHead>
-                <TableHead className='hidden md:table-cell'>ISBN</TableHead>
-                <TableHead className='text-right'>Available units</TableHead>
+            <TableHeader >
+              <TableRow >
+                <TableHead className='text-center'>Título</TableHead>
+                <TableHead className='hidden sm:table-cell text-center'>Editorial</TableHead>
+                <TableHead className='hidden sm:table-cell text-center'>Año de publicación</TableHead>
+                <TableHead className='hidden md:table-cell text-center'>ISBN</TableHead>
+                <TableHead className='text-center'>Unidades disponibles</TableHead>
+                <TableHead className='text-center'>Prestar</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody className='text-center'>
               {references.map((reference: Reference) => (
                 <TableRow key={reference.id} className='bg-accent'>
-                  {/* <TableCell>
-                    <Avatar>
-                      <AvatarImage src={reference.image} alt='@shadcn' />
-                    </Avatar>
-                  </TableCell> */}
                   <TableCell className='hidden sm:table-cell'>
                     <div className='font-medium'>{reference.title}</div>
                   </TableCell>
                   <TableCell className='hidden md:table-cell'>{reference.publisher}</TableCell>
                   <TableCell className='hidden md:table-cell'>{reference.publicationYear}</TableCell>
                   <TableCell className='hidden md:table-cell'>{reference.ISBN}</TableCell>
-                  <TableCell className='hidden md:table-cell'>{reference.publisher}</TableCell>
                   <TableCell className='hidden md:table-cell'>{reference.availableUnits}</TableCell>
-                  {/* <TableCell className='hidden sm:table-cell'>
-                    <Badge className='text-xs' variant='secondary'>
-                      Fulfilled
-                    </Badge>
-                  </TableCell> */}
-                  {/* <TableCell className='text-right'>
-                    <Link href={`/references/${reference.id}`}>
-                      <Badge className='text-xs' variant='default'>
-                        Edit
-                      </Badge>
-                    </Link>
-                    <Badge className='text-xs' variant='destructive'>
-                      Delete
-                    </Badge>
-                  </TableCell> */}
+                  <TableCell className='hidden md:table-cell'>botón</TableCell>
                 </TableRow>
               ))}
             </TableBody>
