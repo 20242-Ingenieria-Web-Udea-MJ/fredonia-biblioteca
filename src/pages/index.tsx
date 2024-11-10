@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import BooksReferences from "@/components/organisms/borrow";
 
 const geistSans = localFont({
   src: "../lib/fonts/GeistVF.woff",
@@ -21,10 +20,6 @@ export default function Home() {
       >
         <h1 className="text-5xl text-primary">Biblioteca fredonia</h1>
       </div>
-      <div>
-        <BooksReferences />
-      </div>
-        
     </div>
     
     

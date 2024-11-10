@@ -65,7 +65,7 @@ const Sidebar = () => {
               </Badge>
             </Link>
             <Link
-              href="#"
+              href="/books"
               className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-muted-foreground hover:text-primary"
             >
               <Package className="h-6 w-6" />
