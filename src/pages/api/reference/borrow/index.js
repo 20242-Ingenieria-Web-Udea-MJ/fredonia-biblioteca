@@ -21,12 +21,10 @@ export default async function handler(req, res) {
       });
 
       if (borrows.length != 0) {
-        if (!allBooksAvailable) {
-          return res.status(400).json({ error: 'User already has this book' });
-        }
+        return res.status(400).json({ error: 'User already has this book' });
+        
       }
-
-      const books = await prisma.book.findUnique({
+      const books = await prisma.book.findMany({
         where: { referenceId: referenceId, isBorrowed: false },
       });
       
@@ -67,7 +65,7 @@ export default async function handler(req, res) {
       });
 
 
-      res.status(200).json(updatedReference);
+      res.status(200).json(reference);
     } catch (error) {
       console.error("Error borrowing reference:", error);
       res.status(500).json({ error: 'Internal Server Error' });
