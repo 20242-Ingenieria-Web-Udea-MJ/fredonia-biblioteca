@@ -1,9 +1,9 @@
-import CustomersTable from "@/components/organisms/borrow";
+import TransactionsPage from "@/components/organisms/Transaction";
 
-export default function Orders() {
+export default function Loans() {
   return (
-    <div className="grid w-full">
-      <CustomersTable />
+    <div className="w-full">
+      <TransactionsPage />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React, { useEffect, useState } from "react";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../ui/badge";
 import { ActionsMenu } from "./UsersActionMenu";
 import { EditUserModal } from "./EditUserModal";
 import { UserFormValues } from "@/schemas/UserSchema";
