@@ -27,9 +27,9 @@ export const MasterDropdown: React.FC<MasterDropdownProps> = ({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Settings2 />
+      <DropdownMenuTrigger asChild className="h-12 w-12">
+        <Button>
+          <Settings2 className="h-12 w-12" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
