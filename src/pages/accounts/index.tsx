@@ -1,4 +1,4 @@
-import { UsersTable } from "@/components/molecules/UsersTable";
+import { UsersTable } from "@/components/molecules/users/UsersTable";
 import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useSession, signIn } from "next-auth/react";
