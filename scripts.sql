@@ -56,4 +56,20 @@ select * from public."Borrow"
 select * from public."Session"
 
 select * from public."User"
-  
+
+INSERT INTO public."User" (id, name, email, email_verified, image, role, password, "createdAt", "lastModified")
+VALUES
+  ('cm38zb2ee0000x23b8unt3ec4', 'Esteban', 'esteban.cossio@hotmail.es', NULL, NULL, 'ADMIN', 'ContraseñaSegura123-', '2024-11-08 16:56:29.102', '2024-11-09 15:02:26.111'),
+  ('cm38zbmm10001x23b4581z9kj', 'Prueba', 'pruebaAuth0@ejemplo.net', NULL, NULL, 'USER', 'ContraseñaSegura456-', '2024-11-08 16:56:55.295', '2024-11-09 16:04:55.921');
+
+
+
+select * from public."Reference"
+
+
+select * from public."Borrow"
+
+
+update public."Reference"
+set "availableUnits" = 0
+where id not in (1,2,3)

@@ -60,9 +60,9 @@ const Sidebar = () => {
             >
               <ShoppingCart className="h-6 w-6" />
               Prestamos
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                2
-              </Badge>
+              {/* <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                2 
+              </Badge> */}
             </Link>
             <Link
               href="/books"

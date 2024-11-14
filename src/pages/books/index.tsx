@@ -1,5 +1,5 @@
 import React from 'react'
-import BooksReferences from "@/components/organisms/borrow";
+import BooksReferences from "@/components/organisms/book";
 
 
 const index = () => {

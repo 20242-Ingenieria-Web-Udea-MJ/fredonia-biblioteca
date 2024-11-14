@@ -1,9 +1,13 @@
-import TransactionsPage from "@/components/organisms/Transaction";
+import React from 'react'
+import BorrowReferences from "@/components/organisms/borrow";
 
-export default function Loans() {
+
+const index = () => {
   return (
-    <div className="w-full">
-      <TransactionsPage />
+    <div>
+        <BorrowReferences />
     </div>
-  );
+  )
 }
+
+export default index
