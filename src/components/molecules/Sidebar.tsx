@@ -12,7 +12,6 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
@@ -60,9 +59,6 @@ const Sidebar = () => {
             >
               <ShoppingCart className="h-6 w-6" />
               Prestamos
-              {/* <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                2 
-              </Badge> */}
             </Link>
             <Link
               href="/books"
@@ -71,12 +67,21 @@ const Sidebar = () => {
               <Package className="h-6 w-6" />
               Libros
             </Link>
+            {session?.user.role === "ADMIN" && (
+              <Link
+                href="/accounts"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Users className="h-6 w-6" />
+                Usuarios
+              </Link>
+            )}
             <Link
-              href="/accounts"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              href="/transactions"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-muted-foreground hover:text-primary"
             >
-              <Users className="h-6 w-6" />
-              Usuarios
+              <Package className="h-6 w-6" />
+              Transacciones
             </Link>
           </nav>
         </div>

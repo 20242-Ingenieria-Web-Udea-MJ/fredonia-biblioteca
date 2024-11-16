@@ -90,7 +90,10 @@ export const TransactionTable = () => {
   return (
     <Card className="w-full">
       <CardHeader className="px-7">
-        <CardTitle>Gestión de Transacciones de Inventario</CardTitle>
+        <CardTitle>
+          Transacciones del libro{" "}
+          <span className="font-bold text-primary">{selectedBook.title}</span>
+        </CardTitle>
         <CardDescription>
           Movimientos para el Maestro seleccionado
         </CardDescription>
@@ -98,7 +101,7 @@ export const TransactionTable = () => {
         {/* Dropdown para seleccionar el Maestro */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button>{selectedBook.title}</Button>
+            <h1 className="text-5xl text-center font-bold"></h1>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             {sampleBooks.map((book) => (
