@@ -13,6 +13,7 @@ export default function App({
     <SessionProvider session={session}>
       <Head>
         <title>Biblioteca Fredonia</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <Layout>
         <Component {...pageProps} />
