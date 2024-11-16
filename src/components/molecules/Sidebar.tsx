@@ -76,13 +76,6 @@ const Sidebar = () => {
                 Usuarios
               </Link>
             )}
-            <Link
-              href="/transactions"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-muted-foreground hover:text-primary"
-            >
-              <Package className="h-6 w-6" />
-              Transacciones
-            </Link>
           </nav>
         </div>
         <div className="mt-auto p-4">

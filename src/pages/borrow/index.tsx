@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 import BorrowReferences from "@/components/organisms/borrow";
-
 
 const index = () => {
   return (
     <div>
-        <BorrowReferences />
+      <BorrowReferences />
     </div>
-  )
-}
+  );
+};
 
-export default index
+export default index;
