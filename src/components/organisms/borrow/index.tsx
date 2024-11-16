@@ -32,7 +32,7 @@ type Borrow = {
   returned: boolean;
   startDate: string;
   endDate: string;
-  reference: {title: string};
+  reference: {id: string, title: string, };
 };
 
 interface ExtendedSession extends Session {
@@ -48,6 +48,35 @@ interface ExtendedSession extends Session {
 export default function Component() {
   const { data: session } = useSession() as { data: ExtendedSession | null };
   const [borrows, setBorrows] = useState<any[]>([]);
+
+  async function returnBook(referenceId: string, borrowId: string, bookId: string) {
+    console.log("Returning book");
+  
+    const endpoint = "/api/return-book";
+    const body = { referenceId, borrowId, bookId };
+  
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+  
+      if (!response.ok) { 
+        console.log(`Error: ${response.statusText}`);
+      }
+      else {
+        const data = await response.json();
+        console.log("Book returned successfully:", data);
+      }
+  
+      
+    } catch (error) {
+      console.error("Failed to returned book:", error);
+    }
+  }
 
   useEffect(() => {
     const fetchBorrows = async () => {
@@ -113,7 +142,7 @@ export default function Component() {
                       Devuelto
                     </Button>
                   ) : (
-                    <Button >
+                    <Button onClick={() => returnBook(borrow.reference.id, borrow.id, borrow.bookId)}>
                       Regresar
                     </Button>
                   )

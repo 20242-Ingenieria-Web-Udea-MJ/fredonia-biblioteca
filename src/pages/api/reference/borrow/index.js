@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
       // Get all books per reference
       const borrows = await prisma.borrow.findMany({
-        where: { referenceId: referenceId, userId: userId},
+        where: { referenceId: referenceId, userId: userId, isActive: true, returned: false },
       });
 
       if (borrows.length != 0) {

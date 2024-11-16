@@ -16,6 +16,7 @@ export default async function handler(req, res) {
       include: {
         reference: {
           select: {
+            id: true,
             title: true
           }
         }
