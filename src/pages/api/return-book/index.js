@@ -1,18 +1,17 @@
 // pages/api/references/borrow/index.js
 
 import { PrismaClient } from '@prisma/client';
-import { log } from 'console';
 
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { referenceId, borrowId, bookId} = req.body;
+      const { referenceId, borrowId, bookId } = req.body;
 
       console.log("referenceId", referenceId);
-        console.log("borrowId", borrowId);
-        console.log("bookId", bookId);
+      console.log("borrowId", borrowId);
+      console.log("bookId", bookId);
 
       // Check if the required data is provided
       if (!referenceId || !bookId || !borrowId) {
@@ -20,10 +19,10 @@ export default async function handler(req, res) {
       }
 
       const borrow = await prisma.borrow.findUnique({
-        where: { id: borrowId},
+        where: { id: borrowId },
       });
-      
-      if (borrow.isActive == false  || borrow.returned == true) {
+
+      if (borrow.isActive == false || borrow.returned == true) {
         return res.status(400).json({ error: 'Reference already returned' });
       }
       //Update book 
